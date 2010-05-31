@@ -11,19 +11,18 @@
  * Version: 0.2
  * Updated: 2010-05-31
  */
-
 (function($){
 
   /*
-  .longclick( [ duration ], [ handler ] )
-  .longclick()
+  `.longclick( [ duration ], handler )` to subscribe to event
+  `.longclick()` to trigger the event
 
-  This method is a shortcut for .bind('longclick', handler) in the first variation,
-  and .trigger('longclick') in the second.
+  This method is a shortcut for `.bind("longclick", handler)` in the first variation
+  and `.trigger("longclick")` in the second.
 
-  If supplied, custom duration (in milliseconds) is used for target element(s).
+  If supplied, custom *duration* (in milliseconds) is used for target element(s).
 
-  returns jQuery
+  Returns *jQuery*.
   */
   $.fn.longclick= function longclick(){
     var
@@ -39,9 +38,9 @@
   */
   $.longclick= {
     /*
-    Duration of mouse button press (in milliseconds) after which `longclick` event occours.
-    Defaults to 500 (half a second)
-    Example: `jQuery.longclick.duration= 2000` sets 1 second duration
+    For how long mouse button must be pressed down (or touched) stationery for the event to fire.
+    Defaults to 500 (milliseconds).
+    Example: `jQuery.longclick.duration= 1000` sets 1 second duration
     */
     duration: 500
   }
