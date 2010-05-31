@@ -1,29 +1,37 @@
 /**
- * jQuery Longclick
- * ================
- * Press & hold mouse button special event for jQuery 1.4.x
+ * jQuery Longclick Event
+ * ======================
+ * Press & hold mouse button "long click" special event for jQuery 1.4.x
  *
- * @license Copyright (c) 2010 Petr Vostrel (http://petr.vostrel.cz/)
+ * @license Longclick Event
+ * Copyright (c) 2010 Petr Vostrel (http://petr.vostrel.cz/)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * Version: 0.1
+ * Version: 0.2
  * Updated: 2010-05-31
  */
 
 (function($){
 
   /*
-  .longclick( handler(eventObject) )
+  .longclick( [ duration ], [ handler ] )
   .longclick()
 
   This method is a shortcut for .bind('longclick', handler) in the first variation,
   and .trigger('longclick') in the second.
 
+  If supplied, custom duration (in milliseconds) is used for target element(s).
+
   returns jQuery
   */
-  $.fn.longclick= function longclick(handler){
-    return handler ? $(this).bind(type, handler) : $(this).trigger(type)
+  $.fn.longclick= function longclick(){
+    var
+      args= [].splice.call(arguments, 0),
+      handler= args.pop(),
+      duration= args.pop(),
+      $this= $(this).data(_duration_, duration || null)
+    return handler ? $this.bind(type, handler) : $this.trigger(type)
   }
 
   /*
@@ -32,11 +40,12 @@
   $.longclick= {
     /*
     Duration of mouse button press (in milliseconds) after which `longclick` event occours.
-    Example: `jQuery.longclick.delay= 1000` sets the delay to one second
+    Defaults to 500 (half a second)
+    Example: `jQuery.longclick.duration= 2000` sets 1 second duration
     */
-    delay: 500
+    duration: 500
   }
-  
+
   /*
   Bindings
   */
@@ -58,27 +67,27 @@
   function schedule(event){
     /* Catch in closure the `this` reference and `arguments` for later */
     var
-      that= this,
+      element= this,
       args= arguments
-    /* Flag as "not triggered" and schedule the trigger */
+    /* Flag as "not fired" and schedule the trigger */
     $(this)
-    .data(_triggered_, false)
-    .data(_timer_, setTimeout(scheduled, $.longclick.delay))
+    .data(_fired_, false)
+    .data(_timer_, setTimeout(scheduled, $(this).data(_duration_) || $.longclick.duration))
 
     function scheduled(){
-      /* Flag as "triggered" and rejoin the default event flow */
-      $(that).data(_triggered_, true)
+      /* Flag as "fired" and rejoin the default event flow */
+      $(element).data(_fired_, true)
       event.type= type
-      jQuery.event.handle.apply(that, args)
+      jQuery.event.handle.apply(element, args)
     }
   }
   function annul(event){
-    /* Annul the scheduled triggering */
+    /* Annul the scheduled trigger */
     clearTimeout($(this).data(_timer_))
   }
   function click(event){
     /* Prevent `click` event to be fired after button release once `longclick` was fired */
-    if ($(this).data(_triggered_)) return false
+    if ($(this).data(_fired_)) return false
   }
 
   /*
@@ -87,14 +96,12 @@
   var
     type= 'longclick',
     namespace= '.' + type,
-    self= $.event.special[type],
 
     /* Event strings */
     _mousedown_= 'mousedown'+namespace, _click_= 'click'+namespace,
     _mousemove_= 'mousemove'+namespace, _mouseup_= 'mouseup'+namespace,
-    
+
     /* Storage keys */
-    _timer_= 'timer'+namespace,
-    _triggered_= 'fired'+namespace
+    _duration_= 'duration'+namespace, _timer_= 'timer'+namespace, _fired_= 'fired'+namespace
 
 })(jQuery);
