@@ -40,8 +40,8 @@ It's free for use in all personal or commercial projects under both
 Copyright (c) 2010 [Petr Vostřel][pisi]
 » Check out my other jQuery plugin [Reel][reel] for 360° image projection
 
-[license-mit]: http://github.com/pisi/Reel/blob/animation/MIT-LICENSE.txt
-[license-gpl]: http://github.com/pisi/Reel/blob/animation/GPL-LICENSE.txt
+[license-mit]: /pisi/Longclick/raw/master/MIT-LICENSE.txt
+[license-gpl]: /pisi/Longclick/raw/master/GPL-LICENSE.txt
 [jquery]: http://www.jquery.com/
 [pisi]: http://petr.vostrel.cz/
 [reel]: http://jquery.vostrel.cz/reel
