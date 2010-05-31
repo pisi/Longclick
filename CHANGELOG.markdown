@@ -7,6 +7,7 @@ Changelog
 * `jQuery.longclick.delay` has been renamed to `jQuery.longclick.duration`.
 * Invalid flag store key fixed.
 * Documentation comments & README updates.
+* Added QUnit test suite in `test/`
 
 0.1
 ---
