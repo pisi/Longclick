@@ -4,6 +4,7 @@ Changelog
 0.3
 ---
 * Added `click` proxy. Ordinary built-in `click` can now be used to establish long click event simply by supplying a duration.
+* Improved "click" event prevention in case of long click.
 0.2
 ---
 * `longclick` method now accepts an optional duration argument which overrides the default duration.

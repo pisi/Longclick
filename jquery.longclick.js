@@ -100,7 +100,7 @@
   }
   function click(event){
     /* Prevent `click` event to be fired after button release once `longclick` was fired */
-    if ($(this).data(_fired_)) return false
+    if ($(this).data(_fired_)) return event.stopImmediatePropagation() || false
   }
 
   /*
