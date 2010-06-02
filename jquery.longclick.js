@@ -66,7 +66,7 @@
     setup: function(data, namespaces){
       $(this)
       .bind(_mousedown_, schedule)
-      .bind(_mousemove_ + ' ' + _mouseup_, annul)
+      .bind([_mousemove_, _mouseup_, _mouseout_].join(' '), annul)
       .bind(_click_, click)
     },
     teardown: function(namespaces){
@@ -113,6 +113,7 @@
     /* Event strings */
     _mousedown_= 'mousedown'+namespace, _click_= 'click'+namespace,
     _mousemove_= 'mousemove'+namespace, _mouseup_= 'mouseup'+namespace,
+    _mouseout_= 'mouseout'+namespace,
 
     /* Storage keys */
     _duration_= 'duration'+namespace, _timer_= 'timer'+namespace, _fired_= 'fired'+namespace

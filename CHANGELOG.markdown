@@ -4,6 +4,7 @@ Changelog
 0.3
 ---
 * Added `click` proxy. Ordinary built-in `click` can now be used to establish long click event simply by supplying a duration.
+* The "mouseout" event is newly bound as one of annul events.
 * A demonstration example has been added in `example.html`.
 * Improved "click" event prevention in case of long click.
 0.2
