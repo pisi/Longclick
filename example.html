@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>jQuery Long Click Event Demo</title>
+    <script src='http://code.jquery.com/jquery-latest.min.js' type='text/javascript'></script>
+    <script src='jquery.longclick.js' type='text/javascript'></script>
+    <style type="text/css">
+      .example{ position: relative; float: left; padding: 30px; background: #ffa; border: 1px solid gray; cursor: pointer; }
+      .example .selector{ position: absolute; top: 0; right: 0; padding: 2px 6px; background: gray; color: white; }
+      .example h2{ margin-top: 0; }
+      .example code{ display: block; }
+      .clicked.example{ background: black; color: #ffa; border-color: gray; }
+    </style>
+  </head>
+  <body>
+    <h1>
+      <a href="http://github.com/pisi/Longclick">jQuery Long Click Event</a> Demo Example
+    </h1>
+
+    <div id="area" class="example">
+      <div class="selector">#clickable_area</div>
+      <h2>Click me!</h2>
+      <p>This area can be both clicked and long-clicked by pressing and holding for half a second</p>
+      <code>$('#click').click(500, function(){ ... })</code>
+      <code>$('#click').click(function(){ ... })</code>
+    </div>
+
+    <script type='text/javascript'>
+      $('#area').click(500, function(){ $(this).toggleClass('clicked').find('h2').text('Long clicked!') })
+      $('#area').click(function(){ $(this).toggleClass('clicked').find('h2').text('Clicked!') })
+    </script>
+    
+  </body>
+</html>
