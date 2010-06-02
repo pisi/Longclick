@@ -14,15 +14,29 @@
 (function($){
 
   /*
+  `.click( duration, handler )` to subscribe to event
+
+  * Simply supply `duration` to the well-known `.click` method and you have a *long click*.
+  * This method is a shortcut for `.bind("longclick", handler)`.
+  * Returns *jQuery*.
+  */
+  var
+    ordinary_click= $.fn.click
+
+  $.fn.click= function click(duration, handler){
+    /* Shortcircuit ordinary click calls */
+    if (!handler) return ordinary_click.apply(this, arguments)
+    /* Bind long click */
+    return $(this).data(_duration_, duration || null).bind(type, handler)
+  }
+
+  /*
   `.longclick( [ duration ], handler )` to subscribe to event
   `.longclick()` to trigger the event
 
-  This method is a shortcut for `.bind("longclick", handler)` in the first variation
-  and `.trigger("longclick")` in the second.
-
-  If supplied, custom *duration* (in milliseconds) is used for target element(s).
-
-  Returns *jQuery*.
+  * This method is a shortcut for `.click(duration, handler)`. in the first variation and `.trigger("longclick")` in the second.
+  * If supplied, custom `duration` is used for target element(s).
+  * Returns *jQuery*.
   */
   $.fn.longclick= function longclick(){
     var
@@ -30,7 +44,7 @@
       handler= args.pop(),
       duration= args.pop(),
       $this= $(this).data(_duration_, duration || null)
-    return handler ? $this.bind(type, handler) : $this.trigger(type)
+    return handler ? $this.click(duration, handler) : $this.trigger(type)
   }
 
   /*

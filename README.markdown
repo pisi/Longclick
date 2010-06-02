@@ -1,33 +1,47 @@
-jQuery Longclick Event
-======================
-*Press & hold mouse/touch "long click" special event for [jQuery 1.4.x][jquery]
+jQuery *Long Click* Event
+=======================
+*Press & hold mouse/touch "long click" special event for [jQuery 1.4.x][jquery]*
 
-Method:
--------
-### `.longclick( [ duration ], handler )` to subscribe to event
-### `.longclick()` to trigger the event
-* This method is a shortcut for `.bind("longclick", handler)` in the first variation
-and `.trigger("longclick")` in the second.
-* If supplied, custom *duration* (in milliseconds) is used for target element(s).
+Using *long click*:
+----------------------
+
+### `.click( duration, handler )`
+* Simply supply `duration` to the well-known `.click` method and you have a *long click*.
+* This method is a shortcut for `.bind("longclick", handler)`.
 * Returns *jQuery*.
 
-Event:
-------
+### or `.longclick( [ duration ], handler )`
+* This method is a shortcut for `.click(duration, handler)`.
+* If supplied, custom `duration` is used for target element(s).
+* Returns *jQuery*.
+
+The parameter:
+----------
+
+### `duration`
+* For how long (in milliseconds) mouse button must be pressed down (or touched) stationery to qualify as a *long click*.
+* Default value of **500** is stored in:
+
+    `jQuery.longclick.duration`
+
+The event:
+----------
 ### `"longclick"`
 * Works with standard [`live`][jquery-live], [`bind`][jquery-bind], [`unbind`][jquery-unbind] and [`trigger`][jquery-trigger] event methods as one would expect.
+* To manually trigger *long click* you use:
 
-Configuration:
---------------
-* `jQuery.longclick.duration` - for how long mouse button must be pressed down (or touched) stationery for the event to fire. Defaults to 500 (milliseconds).
+    `.longclick()`
+    * This method is a shortcut for `.trigger("longclick")`.
+    * Returns *jQuery*.
 
 Fair warning:
 -------------
-**Under intensive development**. v0.x works just fine, but is very "fluid" API-wise.
+**Under loving development**. v0.x works just fine, but is very "fluid" API-wise.
 Till v1.0.
 
 Requirements:
 -------------
-* [jQuery 1.4.x][jquery]
+* [jQuery 1.4.x][jquery].
 
 License:
 --------
