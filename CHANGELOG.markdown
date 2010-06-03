@@ -7,6 +7,8 @@ Changelog
 * The "mouseout" event is newly bound as one of annul events.
 * A demonstration example has been added in `example.html`.
 * Improved "click" event prevention in case of long click.
+* (Un)binding and triggering tests added to test suite.
+
 0.2
 ---
 * `longclick` method now accepts an optional duration argument which overrides the default duration.
