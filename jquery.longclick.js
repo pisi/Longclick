@@ -8,34 +8,34 @@
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * Version: 0.2
- * Updated: 2010-05-31
+ * Version: 0.3
+ * Updated: 2010-06-03
  */
 (function($){
 
   /*
-  `.click( duration, handler )` to subscribe to event
+  `.click( duration, handler )`
 
   * Simply supply `duration` to the well-known `.click` method and you have a *long click*.
   * This method is a shortcut for `.bind("longclick", handler)`.
   * Returns *jQuery*.
   */
   var
-    ordinary_click= $.fn.click
+    $_fn_click= $.fn.click
 
   $.fn.click= function click(duration, handler){
     /* Shortcircuit ordinary click calls */
-    if (!handler) return ordinary_click.apply(this, arguments)
+    if (!handler) return $_fn_click.apply(this, arguments)
     /* Bind long click */
     return $(this).data(_duration_, duration || null).bind(type, handler)
   }
 
   /*
-  `.longclick( [ duration ], handler )` to subscribe to event
-  `.longclick()` to trigger the event
+  `.longclick( [ duration ], [ handler ] )`
 
-  * This method is a shortcut for `.click(duration, handler)`. in the first variation and `.trigger("longclick")` in the second.
-  * If supplied, custom `duration` is used for target element(s).
+  * If supplied, optional custom `duration` is used for target element(s).
+  * This method is a shortcut for `.click(duration, handler)` when at least `handler` is supplied
+    and for `.trigger("longclick")` if called without arguments.
   * Returns *jQuery*.
   */
   $.fn.longclick= function longclick(){
@@ -52,9 +52,10 @@
   */
   $.longclick= {
     /*
-    For how long mouse button must be pressed down (or touched) stationery for the event to fire.
-    Defaults to 500 (milliseconds).
-    Example: `jQuery.longclick.duration= 1000` sets 1 second duration
+    * For how long (in milliseconds) mouse button must be pressed down (or touched) stationery
+      to qualify as a *long click*.
+    * False value results in using the configured default.
+    * Default `duration` is **500** and is stored in `jQuery.longclick.duration` variable.
     */
     duration: 500
   }

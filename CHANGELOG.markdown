@@ -8,6 +8,7 @@ Changelog
 * A demonstration example has been added in `example.html`.
 * Improved "click" event prevention in case of long click.
 * (Un)binding and triggering tests added to test suite.
+* Documentation comments & README improvements.
 
 0.2
 ---
