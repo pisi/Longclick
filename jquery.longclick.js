@@ -8,8 +8,8 @@
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * Version: 0.3
- * Updated: 2010-06-03
+ * Version: 0.3.1
+ * Updated: 2010-06-04
  */
 (function($){
 
@@ -67,7 +67,7 @@
     setup: function(data, namespaces){
       $(this)
       .bind(_mousedown_, schedule)
-      .bind([_mousemove_, _mouseup_, _mouseout_].join(' '), annul)
+      .bind([_mousemove_, _mouseup_, _mouseout_, _contextmenu_].join(' '), annul)
       .bind(_click_, click)
     },
     teardown: function(namespaces){
@@ -114,7 +114,7 @@
     /* Event strings */
     _mousedown_= 'mousedown'+namespace, _click_= 'click'+namespace,
     _mousemove_= 'mousemove'+namespace, _mouseup_= 'mouseup'+namespace,
-    _mouseout_= 'mouseout'+namespace,
+    _mouseout_= 'mouseout'+namespace, _contextmenu_= 'contextmenu'+namespace,
 
     /* Storage keys */
     _duration_= 'duration'+namespace, _timer_= 'timer'+namespace, _fired_= 'fired'+namespace

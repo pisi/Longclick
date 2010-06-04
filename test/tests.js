@@ -157,6 +157,22 @@
       start();
     }, 1000);
   });
+  asyncTest( 'Longclick is dropped on contextmenu event (right click)', function(){
+    expect(1);
+
+    /* Bind */
+    $element.longclick(function finish(){ event_fired= true });
+
+    /* Simulate long click interaction */
+    $element.trigger('mousedown');
+    setTimeout(function(){ $element.trigger('contextmenu') }, 100);
+
+    /* Check if hasn't been fired after a while */
+    setTimeout(function(){
+      equal( event_fired, false, 'Event had been dropped')
+      start();
+    }, 1000);
+  });
   asyncTest( 'Bind event by `click` method and supplying the duration', function(){
     expect(2);
 

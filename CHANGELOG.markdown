@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.3.1
+-----
+* Long click is dropped on "contextmenu" event to prevent right button from long clicking.
+
 0.3
 ---
 * Added `click` proxy. Ordinary built-in `click` can now be used to establish long click event simply by supplying a duration.
