@@ -65,10 +65,20 @@
   */
   $.event.special.longclick= {
     setup: function(data, namespaces){
-      $(this)
-      .bind(_mousedown_, schedule)
-      .bind([_mousemove_, _mouseup_, _mouseout_, _contextmenu_].join(' '), annul)
-      .bind(_click_, click)
+      if (!(/iphone|ipad|ipod/i).test(navigator.userAgent)){
+        /* normal technique for standard mouse-based interaction */
+        $(this)
+        .bind(_mousedown_, schedule)
+        .bind([_mousemove_, _mouseup_, _moouseout_, _contextmenu_].join(' '), annul)
+        .bind(_click_, click)
+      }else{
+        /* and special handling for touch-based interaction on iPhone-compatibile devices */
+        touch_enabled(this)
+        .bind(_touchstart_, schedule)
+        .bind([_touchend_, _touchmove_, _touchcancel_].join(' '), annul)
+        .bind(_click_, click)
+        .css({ WebkitUserSelect: 'none' })
+      }
     },
     teardown: function(namespaces){
       $(this).unbind(namespace)
@@ -76,9 +86,21 @@
   }
 
   /*
+  Commit subset of touch events to trigger jQuery events of same names
+  */
+  function touch_enabled(element){
+    $.each('touchstart touchmove touchend touchcancel'.split(/ /), function bind(ix, it){
+      element.addEventListener(it, function trigger_jquery_event(event){ $(element).trigger(it) }, false);
+    });
+    return $(element);
+  }
+
+  /*
   Handlers
   */
   function schedule(event){
+    /* Check the timer isn't already running and drop if so */
+    if ($(this).data(_timer_)) return;
     /* Catch in closure the `this` reference and `arguments` for later */
     var
       element= this,
@@ -97,7 +119,7 @@
   }
   function annul(event){
     /* Annul the scheduled trigger */
-    clearTimeout($(this).data(_timer_))
+    $(this).data(_timer_, clearTimeout($(this).data(_timer_)) || null)
   }
   function click(event){
     /* Prevent `click` event to be fired after button release once `longclick` was fired */
@@ -115,6 +137,8 @@
     _mousedown_= 'mousedown'+namespace, _click_= 'click'+namespace,
     _mousemove_= 'mousemove'+namespace, _mouseup_= 'mouseup'+namespace,
     _mouseout_= 'mouseout'+namespace, _contextmenu_= 'contextmenu'+namespace,
+    _touchstart_= 'touchstart'+namespace, _touchend_= 'touchend'+namespace,
+    _touchmove_= 'touchmove'+namespace, _touchcancel_= 'touchcancel'+namespace,
 
     /* Storage keys */
     _duration_= 'duration'+namespace, _timer_= 'timer'+namespace, _fired_= 'fired'+namespace

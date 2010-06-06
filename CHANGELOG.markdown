@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.3.2
+-----
+* Support for iPhone/iPad/iPod touch events has been added and confirmed using the iPhone Simulator.
+
 0.3.1
 -----
 * Long click is dropped on "contextmenu" event to prevent right button from long clicking.
