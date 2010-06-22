@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.3.3
+-----
+* Fixed GH-1 issue with dud "mouseout" binding.
+
 0.3.2
 -----
 * Support for iPhone/iPad/iPod touch events has been added and confirmed using the iPhone Simulator.

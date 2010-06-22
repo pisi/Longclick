@@ -8,8 +8,8 @@
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * Version: 0.3.1
- * Updated: 2010-06-04
+ * Version: 0.3.2
+ * Updated: 2010-06-22
  */
 (function($){
 
@@ -69,7 +69,7 @@
         /* normal technique for standard mouse-based interaction */
         $(this)
         .bind(_mousedown_, schedule)
-        .bind([_mousemove_, _mouseup_, _moouseout_, _contextmenu_].join(' '), annul)
+        .bind([_mousemove_, _mouseup_, _mouseout_, _contextmenu_].join(' '), annul)
         .bind(_click_, click)
       }else{
         /* and special handling for touch-based interaction on iPhone-compatibile devices */
