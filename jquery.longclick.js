@@ -69,7 +69,7 @@
         /* normal technique for standard mouse-based interaction */
         $(this)
         .bind(_mousedown_, schedule)
-        .bind([_mousemove_, _mouseup_, _mouseout_, _contextmenu_].join(' '), annul)
+        .bind([_mouseup_, _mouseout_, _contextmenu_].join(' '), annul)
         .bind(_click_, click)
       }else{
         /* and special handling for touch-based interaction on iPhone-compatibile devices */
