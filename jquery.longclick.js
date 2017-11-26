@@ -69,13 +69,13 @@
         /* normal technique for standard mouse-based interaction */
         $(this)
         .bind(_mousedown_, schedule)
-        .bind([_mousemove_, _mouseup_, _mouseout_, _contextmenu_].join(' '), annul)
+        .bind([_mouseup_, _mouseout_, _contextmenu_].join(' '), annul)
         .bind(_click_, click)
       }else{
         /* and special handling for touch-based interaction on iPhone-compatibile devices */
         touch_enabled(this)
         .bind(_touchstart_, schedule)
-        .bind([_touchend_, _touchmove_, _touchcancel_].join(' '), annul)
+        .bind([_touchend_, _touchcancel_].join(' '), annul)
         .bind(_click_, click)
         .css({ WebkitUserSelect: 'none' })
       }
@@ -89,7 +89,7 @@
   Commit subset of touch events to trigger jQuery events of same names
   */
   function touch_enabled(element){
-    $.each('touchstart touchmove touchend touchcancel'.split(/ /), function bind(ix, it){
+    $.each('touchstart touchend touchcancel'.split(/ /), function bind(ix, it){
       element.addEventListener(it, function trigger_jquery_event(event){ $(element).trigger(it) }, false);
     });
     return $(element);
@@ -114,7 +114,7 @@
       /* Flag as "fired" and rejoin the default event flow */
       $(element).data(_fired_, true)
       event.type= type
-      jQuery.event.handle.apply(element, args)
+      jQuery.event.dispatch.apply(element, args)
     }
   }
   function annul(event){
@@ -135,10 +135,10 @@
 
     /* Event strings */
     _mousedown_= 'mousedown'+namespace, _click_= 'click'+namespace,
-    _mousemove_= 'mousemove'+namespace, _mouseup_= 'mouseup'+namespace,
+    _mouseup_= 'mouseup'+namespace,
     _mouseout_= 'mouseout'+namespace, _contextmenu_= 'contextmenu'+namespace,
     _touchstart_= 'touchstart'+namespace, _touchend_= 'touchend'+namespace,
-    _touchmove_= 'touchmove'+namespace, _touchcancel_= 'touchcancel'+namespace,
+    _touchcancel_= 'touchcancel'+namespace,
 
     /* Storage keys */
     _duration_= 'duration'+namespace, _timer_= 'timer'+namespace, _fired_= 'fired'+namespace
